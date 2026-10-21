@@ -1,0 +1,6 @@
+node_modules
+data
+.env
+
+# Build output (npm run build)
+public/dist/

@@ -1,0 +1,11 @@
+node_modules
+data
+*.db
+*.db-*
+.git
+.env
+Dockerfile
+docker-compose.yml
+README.md
+public/js/vendor
+public/vendor
