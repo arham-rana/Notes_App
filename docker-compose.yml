@@ -1,0 +1,28 @@
+services:
+  notes:
+    build: .
+    image: notes-app:latest
+    container_name: notes-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - notes-data:/data
+    environment:
+      # Spelling and grammar checks (the LanguageTool service below).
+      LANGUAGETOOL_URL: http://languagetool:8010
+    depends_on:
+      - languagetool
+
+  # Spelling and grammar checker, running on your own server (your text never leaves it).
+  # The first start downloads it (about 300 MB); it uses about 1 GB of memory.
+  languagetool:
+    image: erikvl87/languagetool:latest
+    container_name: notes-languagetool
+    restart: unless-stopped
+    environment:
+      Java_Xms: 256m
+      Java_Xmx: 1g
+
+volumes:
+  notes-data:
